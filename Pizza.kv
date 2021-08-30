@@ -1,0 +1,36 @@
+
+MainWidget:
+
+
+<MainWidget>:
+    recycleView: recycleView
+    RecycleView:
+        id: recycleView
+        viewclass: 'PizzaWidget'
+        RecycleBoxLayout:
+            default_size: None, dp(100)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: 'vertical'
+
+<PizzaWidget>:
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            Label:
+                text: root.nom
+                canvas.before:
+                    Color:
+                        rgb: 0,1,0
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            Label:
+                text: "VEGETARIENNE" if root.vegetarienne else ""
+        Label:
+            text: root.ingredients
+    Label:
+        text: str(root.prix)
+
+
