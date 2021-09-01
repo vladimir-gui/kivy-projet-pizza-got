@@ -84,6 +84,8 @@ MainWidget:
 
 <PizzaWidget>:
     BoxLayout:
+        size_hint_min_x : dp(150)
+        size_hint_max_x : dp(300)
         orientation: "vertical"
         BoxLayout:
             spacing: dp(10)
@@ -100,6 +102,7 @@ MainWidget:
         text: str(root.prix) + " €"
         font_size: dp(20)
         color: couleur_orange
+        pos_hint : {"top" : 0.9}
 
 
 
