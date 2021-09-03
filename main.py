@@ -18,6 +18,7 @@ class PizzaWidget(BoxLayout):
 
 class MainWidget(FloatLayout):
     recycleView = ObjectProperty(None)
+    error_str = StringProperty("")
     
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -27,18 +28,17 @@ class MainWidget(FloatLayout):
         #     Pizza("Chorizo", "chorizo, tomate", 9.5, False),
         #     Pizza("Calzone", "fromage, champignon", 9.5, False)
         # ]
-
-        # def on_parent(self, widget, parent):
-        #     self.recycleView.data = [pizza.recuperer_dictionnaire_pizzas() for pizza in self.pizzas]
-        # ----
-
         HttpClient().get_pizzas(self.on_server_data, self.on_server_error)
+
+    # def on_parent(self, widget, parent):
+    #     self.recycleView.data = [pizza.recuperer_dictionnaire_pizzas() for pizza in self.pizzas]
 
     def on_server_data(self, pizzas_dictionnaire):
         self.recycleView.data = pizzas_dictionnaire
 
-    def on_server_error(self, error_message):
-        print("erreur")
+    def on_server_error(self, error):
+        print("erreur" + error)
+        self.error_str = "ERREUR : " + error
 
 
 
