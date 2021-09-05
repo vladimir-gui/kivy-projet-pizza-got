@@ -2,7 +2,6 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty, NumericProperty, BooleanProperty, ObjectProperty
 from kivy.uix.widget import Widget
-
 from Data import HttpClient
 from models import Pizza
 from kivy.uix.behaviors import CoverBehavior

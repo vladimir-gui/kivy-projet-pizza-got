@@ -7,8 +7,6 @@ class HttpClient:
         url = "https://got-pizzamamadjango.herokuapp.com/api/GetPizza"
 
         def data_received(request, result):
-            # for key, value in result['headers'].items():
-            #     print('{}: {}'.format(key, value))
             data = json.loads(result)
             pizza_dictionnaire = []
             for pizza in data:
