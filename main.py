@@ -7,6 +7,8 @@ from models import Pizza
 from kivy.uix.behaviors import CoverBehavior
 from kivy.uix.floatlayout import FloatLayout
 
+from storage_manager import StorageManager
+
 
 class PizzaWidget(BoxLayout):
     nom = StringProperty()
@@ -34,6 +36,7 @@ class MainWidget(FloatLayout):
 
     def on_server_data(self, pizzas_dictionnaire):
         self.recycleView.data = pizzas_dictionnaire
+        StorageManager().save_data("pizzas", pizzas_dictionnaire)
 
     def on_server_error(self, error):
         print("erreur" + error)

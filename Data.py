@@ -11,7 +11,7 @@ class HttpClient:
             pizza_dictionnaire = []
             for pizza in data:
                 pizza_dictionnaire.append(pizza["fields"])
-
+            print("data_received")
             if on_complete_received_data:
                 on_complete_received_data(pizza_dictionnaire)
 
