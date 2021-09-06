@@ -8,7 +8,7 @@ class StorageManager:
         data_content = file.read()
         file.close()
 
-        return json.load(data_content)
+        return json.loads(data_content)
 
     def save_data(self, data_name, data_content):
         filename = self.get_filename(data_name)

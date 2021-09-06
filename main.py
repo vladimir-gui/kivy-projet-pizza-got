@@ -31,8 +31,10 @@ class MainWidget(FloatLayout):
         # ]
         HttpClient().get_pizzas(self.on_server_data, self.on_server_error)
 
-    # def on_parent(self, widget, parent):
-    #     self.recycleView.data = [pizza.recuperer_dictionnaire_pizzas() for pizza in self.pizzas]
+    def on_parent(self, widget, parent):
+        pizzas_dict = StorageManager().load_data("pizzas")
+        # self.recycleView.data = [pizza.recuperer_dictionnaire_pizzas() for pizza in self.pizzas]
+        self.recycleView.data = pizzas_dict
 
     def on_server_data(self, pizzas_dictionnaire):
         self.recycleView.data = pizzas_dictionnaire
