@@ -4,10 +4,12 @@ import json
 class StorageManager:
     def load_data(self, data_name):
         filename = self.get_filename(data_name)
-        file = open(filename, "r")
-        data_content = file.read()
-        file.close()
-
+        try:
+            file = open(filename, "r")
+            data_content = file.read()
+            file.close()
+        except:
+            return None
         return json.loads(data_content)
 
     def save_data(self, data_name, data_content):
