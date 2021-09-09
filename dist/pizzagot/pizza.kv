@@ -1,0 +1,125 @@
+#:import utils kivy.utils
+#:set couleur_orange utils.get_color_from_hex("#DD7835")
+#:set couleur_grise utils.get_color_from_hex("#C8C8C8")
+
+MainWidget:
+
+<LogoImage@Image>:
+    allow_stretch: True
+    size_hint: None, None
+    size: dp(150), dp(60)
+    pos_hint: {"center_x": 0.5}
+
+<TitleLabel@LabelTailleManuel>
+    font_size: dp(22)
+    padding: dp(16), dp(3)
+    bold: True
+    canvas.before:
+        Color:
+            rgb: couleur_orange
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<CoverImage@CoverBehavior+Image>:
+    reference_size: self.texture_size
+    # Overlay noir 60% opacité
+    canvas:
+        Color:
+            rgba: 0,0,0,0.6
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+
+
+<MainWidget>:
+    recycleView: recycleView
+    CoverImage:
+        source: "images/menu_background.jpg"
+    BoxLayout:
+        orientation: "vertical"
+        LogoImage:
+            source: "images/small_logo.png"
+        TitleLabel:
+            text: "Les pizzas"
+        RecycleView:
+            id: recycleView
+            viewclass: 'PizzaWidget'
+            RecycleBoxLayout:
+                padding: dp(20), dp(20)
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(16)
+    Label:
+        text: root.error_str
+        size_hint: 1, None
+        height: dp(30) if len(root.error_str) > 0 else dp(0)
+        font_size: dp(12)
+        color: 1,0,0
+        bold: True
+        canvas.before:
+            Color:
+                rgb: couleur_orange
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+<LeftAlignLabel@Label>:
+    halign: "left"
+    valign: "center"
+    size:self.texture_size
+    text_size: self.size
+    canvas.before:
+        Color:
+#            rgb: utils.get_random_color()
+            rgba: 0, 0, 0, 0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<LabelTailleManuel@Label>:
+    size_hint: None, None
+    size: self.texture_size
+
+<BagdeVegetarienneTailleManuel@LabelTailleManuel>:
+    color: 0, 0, 0, 1
+    bold: True
+    font_size: dp(10)
+    padding: dp(8), dp(3)
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "images/badge.png"
+
+
+<PizzaWidget>:
+    BoxLayout:
+        size_hint_min_x : dp(150)
+        size_hint_max_x : dp(300)
+        orientation: "vertical"
+        BoxLayout:
+            spacing: dp(10)
+            LabelTailleManuel:
+                text: root.nom
+                bold: True
+                font_size: dp(22)
+            BagdeVegetarienneTailleManuel:
+                text: "VEGETARIENNE" if root.vegetarienne else ""
+        LeftAlignLabel:
+            text: root.ingredients
+            color: couleur_grise
+    LabelTailleManuel:
+        text: str(root.prix) + " €"
+        font_size: dp(20)
+        color: couleur_orange
+        pos_hint : {"top" : 0.9}
+
+
+
+
